@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/VRTK/Examples/031_CameraRig_HeadsetGazePointer.unity
+  isLoaded: 1
+  isActive: 1
