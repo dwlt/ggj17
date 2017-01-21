@@ -47,7 +47,7 @@ namespace VRTK
         /// </summary>
         public event ObjectInteractEventHandler ControllerUngrabInteractableObject;
 
-        private GameObject grabbedObject = null;
+        public GameObject grabbedObject = null;
         private bool influencingGrabbedObject = false;
         private VRTK_InteractTouch interactTouch;
         private VRTK_ControllerActions controllerActions;
@@ -218,7 +218,7 @@ namespace VRTK
             }
         }
 
-        private void InitGrabbedObject()
+        public void InitGrabbedObject()
         {
             grabbedObject = interactTouch.GetTouchedObject();
             if (grabbedObject)

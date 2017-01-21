@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\ScrollScript.cs" />
     <Compile Include="Assets\Scripts\ThirdHand.cs" />
     <Compile Include="Assets\Scripts\Utensil.cs" />
+    <Compile Include="Assets\Scripts\WizardWhite.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_Teleporter.cs" />
