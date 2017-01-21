@@ -5,7 +5,7 @@ using UnityEngine;
 // this component should live on whatever the surface of the couldron is, not the cauldron shell
 public class Cauldron : MonoBehaviour {
 	
-	private ArrayList recipe; 
+	public ArrayList recipe; 
 	private ArrayList ingredientTypes;
 	public GameObject theGame;
 
@@ -19,8 +19,6 @@ public class Cauldron : MonoBehaviour {
 
 	public void init() {
 		ingredientTypes = theGame.GetComponent<WizardWhite> ().ingredientTypes;
-
-		newRecipe ();
 	}
 	
 	// Update is called once per frame
@@ -60,7 +58,7 @@ public class Cauldron : MonoBehaviour {
 	}
 
 
-	void newRecipe() {
+	public void newRecipe() {
 		int recipeSize = Random.Range (minRecipeSize, maxRecipeSize);
 		recipe = new ArrayList ();
 		for (int ingNum = 0; ingNum < recipeSize; ingNum++) {

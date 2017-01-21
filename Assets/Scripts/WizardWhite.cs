@@ -13,6 +13,11 @@ public class WizardWhite : MonoBehaviour {
 	void Start () {
 		initialiseIngredientTypes ();
 		cauldron.init ();
+
+		cauldron.newRecipe ();
+		controlScroll ();
+
+
 	}
 	
 	// Update is called once per frame
@@ -24,5 +29,12 @@ public class WizardWhite : MonoBehaviour {
 		ingredientTypes.Add ("Ruby");
 		ingredientTypes.Add ("Gold");
 		ingredientTypes.Add ("Quartz");
+	}
+
+	void controlScroll() {
+		//scroll.setPanels ("grass");
+		scroll.setPanels (cauldron.recipe[0].ToString(), cauldron.recipe[1].ToString(), cauldron.recipe[2].ToString());
+
+		scroll.panelView ();
 	}
 }
