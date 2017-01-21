@@ -75,8 +75,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Cauldron.cs" />
+    <Compile Include="Assets\Scripts\EnvironmentInteractable.cs" />
     <Compile Include="Assets\Scripts\Ingredient.cs" />
     <Compile Include="Assets\Scripts\ManualDeviceHookup.cs" />
+    <Compile Include="Assets\Scripts\Rock.cs" />
     <Compile Include="Assets\Scripts\ThirdHand.cs" />
     <Compile Include="Assets\Scripts\Utensil.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />

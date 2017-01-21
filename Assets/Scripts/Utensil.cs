@@ -10,5 +10,6 @@ public class Utensil : MonoBehaviour
 
 	[Tooltip("The type of utensil")]
 	public UtensilType utensilType = UtensilType.Shears;
+
 }
 
