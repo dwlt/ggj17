@@ -41,16 +41,18 @@ public class Cauldron : MonoBehaviour {
 
 		string ingredientName = actualIngredient.ingredientName;
 
-		if (actualIngredient.fx) {
-			AudioSource.PlayClipAtPoint(actualIngredient.fx, ingredient.transform.position);
-		}
-
 		if (recipe.Contains (ingredientName)) {
 			Debug.Log ("Recipe contains: " + ingredientName);
 			recipe.Remove (ingredientName);
 			successfulIngredient ();
+			if (actualIngredient.cauldronCorrect) {
+				AudioSource.PlayClipAtPoint(actualIngredient.cauldronCorrect, ingredient.transform.position);
+			}
 		} else {
 			unsuccessfulIngredient ();
+			if (actualIngredient.cauldronIncorrect) {
+				AudioSource.PlayClipAtPoint(actualIngredient.cauldronIncorrect, ingredient.transform.position);
+			}
 			Debug.Log ("Recipe did not contain: " + ingredientName);
 		}
 	}
