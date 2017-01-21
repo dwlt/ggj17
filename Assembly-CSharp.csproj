@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Cauldron.cs" />
+     <Compile Include="Assets\Scripts\CircularAnimator.cs" />
      <Compile Include="Assets\Scripts\EnvironmentInteractable.cs" />
      <Compile Include="Assets\Scripts\Ingredient.cs" />
      <Compile Include="Assets\Scripts\ManualDeviceHookup.cs" />
