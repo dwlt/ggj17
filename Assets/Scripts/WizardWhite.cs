@@ -12,6 +12,7 @@ public class WizardWhite : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		initialiseIngredientTypes ();
+		cauldron.init ();
 	}
 	
 	// Update is called once per frame

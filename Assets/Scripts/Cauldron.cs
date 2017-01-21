@@ -13,8 +13,13 @@ public class Cauldron : MonoBehaviour {
 	public int maxRecipeSize = 7;
 
 	// Use this for initialization
-	void Start () {;
+	void Start () {
+		
+	}
+
+	public void init() {
 		ingredientTypes = theGame.GetComponent<WizardWhite> ().ingredientTypes;
+
 		newRecipe ();
 	}
 	
