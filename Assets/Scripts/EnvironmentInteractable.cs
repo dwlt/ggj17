@@ -5,6 +5,7 @@ using VRTK;
 /*Subclass this to implement the specific behaviour for what should happen when the correct tool hits it*/
 public class EnvironmentInteractable : VRTK_InteractableObject {
     private VRTK_ControllerActions controllerActions;
+    
 
     public enum IngredientType
     {
@@ -16,12 +17,36 @@ public class EnvironmentInteractable : VRTK_InteractableObject {
     [Tooltip("The type of ingredient contained within this object")]
     public IngredientType ingredientType;
     public string ingredientName;
-    public int testInt;
+    public GameObject resource;
 
     //abstract method to be implemented for specific behaviour
     public virtual void interact()
     {
 
+    }
+
+    //triggered when controller overlaps with object - use to do Utensil/EnvironmentInteractable harvesting
+    public override void ToggleHighlight(bool toggle)
+    {
+        BeingTooled(toggle);
+    }
+
+    // tooled is true if there's the right utensil inside me!
+    public void BeingTooled(bool tooled)
+    {
+        Debug.Log("Tooled! by " + this.controllerActions.gameObject.name + " = " + tooled);
+        //Get the thing that's tooling me this.controllerActions.gameObject.name 
+        GameObject utensil = this.controllerActions.gameObject;
+        //spawn my resource - try not to spawn too many - OOPS
+
+        if (!utensil.GetComponent<Utensil>().attachedIngredient || utensil.GetComponent<Utensil>().attachedIngredient.ingredientType != this.resource.GetComponent<Ingredient>().ingredientType)
+        {
+            GameObject harvestedResource = Instantiate(this.resource, transform.position, transform.rotation);
+            //attach it to the utensil
+            Rigidbody attachPoint = controllerActions.GetComponent<VRTK_InteractGrab>().controllerAttachPoint;
+            harvestedResource.GetComponent<Ingredient>().grabAttachMechanicScript.StartGrab(utensil, harvestedResource, attachPoint);
+            utensil.GetComponent<Utensil>().attachedIngredient = harvestedResource.GetComponent<Ingredient>();
+        }
     }
 
     public override bool IsValidInteractableController(GameObject actualController, AllowedController controllerCheck)
