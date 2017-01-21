@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\Ingredient.cs" />
     <Compile Include="Assets\Scripts\ManualDeviceHookup.cs" />
     <Compile Include="Assets\Scripts\Rock.cs" />
+    <Compile Include="Assets\Scripts\ScrollScript.cs" />
     <Compile Include="Assets\Scripts\ThirdHand.cs" />
     <Compile Include="Assets\Scripts\Utensil.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
@@ -221,7 +222,6 @@
     <Compile Include="Assets\VRTK\Examples\Resources\Scripts\Remote_Beam_Controller.cs" />
     <Compile Include="Assets\VRTK\Examples\Resources\Scripts\RendererOffOnDash.cs" />
     <Compile Include="Assets\VRTK\Examples\Resources\Scripts\SceneChanger.cs" />
-    <Compile Include="Assets\VRTK\Examples\Resources\Scripts\ScrollScript.cs" />
     <Compile Include="Assets\VRTK\Examples\Resources\Scripts\SnapDropZoneGroup_Switcher.cs" />
     <Compile Include="Assets\VRTK\Examples\Resources\Scripts\Sphere_Spawner.cs" />
     <Compile Include="Assets\VRTK\Examples\Resources\Scripts\Sword.cs" />

@@ -164,7 +164,7 @@ namespace VRTK
 
         protected Rigidbody interactableRigidbody;
         protected List<GameObject> touchingObjects = new List<GameObject>();
-        protected List<GameObject> grabbingObjects = new List<GameObject>();
+        public List<GameObject> grabbingObjects = new List<GameObject>();
         protected GameObject usingObject = null;
         protected Transform trackPoint;
         protected bool customTrackPoint = false;
@@ -752,6 +752,7 @@ namespace VRTK
 
         private void AttemptSetGrabMechanic()
         {
+            Debug.Log("setting grab for" + this.name);
             if (isGrabbable && grabAttachMechanicScript == null)
             {
                 var setGrabMechanic = GetComponent<VRTK_BaseGrabAttach>();
@@ -846,7 +847,7 @@ namespace VRTK
             }
         }
 
-        private void SetTrackPoint(GameObject currentGrabbingObject)
+        public void SetTrackPoint(GameObject currentGrabbingObject)
         {
             AddTrackPoint(currentGrabbingObject);
             primaryControllerAttachPoint = CreateAttachPoint(GetGrabbingObject().name, "Original", trackPoint);
@@ -871,6 +872,11 @@ namespace VRTK
         {
             var grabScript = currentGrabbingObject.GetComponent<VRTK_InteractGrab>();
             var controllerPoint = ((grabScript && grabScript.controllerAttachPoint) ? grabScript.controllerAttachPoint.transform : currentGrabbingObject.transform);
+           
+            //if (!grabAttachMechanicScript)
+            //{
+              //  grabAttachMechanicScript = transform.gameObject.GetComponent<VRTK_FixedJointGrabAttach>();
+            //}
 
             if (grabAttachMechanicScript)
             {
@@ -878,7 +884,7 @@ namespace VRTK
             }
         }
 
-        private void RemoveTrackPoint()
+        public void RemoveTrackPoint()
         {
             if (customTrackPoint && trackPoint)
             {
