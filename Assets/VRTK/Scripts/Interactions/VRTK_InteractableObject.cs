@@ -483,7 +483,7 @@ namespace VRTK
         /// <param name="actualController">The game object of the controller that is being checked.</param>
         /// <param name="controllerCheck">The value of which controller is allowed to interact with this object.</param>
         /// <returns>Is true if the interacting controller is allowed to grab the object.</returns>
-        public bool IsValidInteractableController(GameObject actualController, AllowedController controllerCheck)
+        public virtual bool IsValidInteractableController(GameObject actualController, AllowedController controllerCheck)
         {
             if (controllerCheck == AllowedController.Both)
             {
