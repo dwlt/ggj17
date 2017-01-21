@@ -12,9 +12,13 @@ public class Cauldron : MonoBehaviour {
 	public int minRecipeSize = 3;
 	public int maxRecipeSize = 7;
 
+	public AudioClip gameOverFanfare;
+	public AudioClip gameWonFanfare;
+
 	// Use this for initialization
 	void Start () {
-		
+		gameOverFanfare.LoadAudioData();
+		gameWonFanfare.LoadAudioData();
 	}
 
 	public void init() {
@@ -48,10 +52,14 @@ public class Cauldron : MonoBehaviour {
 			if (actualIngredient.cauldronCorrect) {
 				AudioSource.PlayClipAtPoint(actualIngredient.cauldronCorrect, ingredient.transform.position);
 			}
+
+			if (recipe.Count == 0 && gameWonFanfare) {
+				AudioSource.PlayClipAtPoint(gameWonFanfare, transform.position);
+			}
 		} else {
 			unsuccessfulIngredient ();
-			if (actualIngredient.cauldronIncorrect) {
-				AudioSource.PlayClipAtPoint(actualIngredient.cauldronIncorrect, ingredient.transform.position);
+			if (gameOverFanfare) {
+				AudioSource.PlayClipAtPoint(gameOverFanfare, ingredient.transform.position);
 			}
 			Debug.Log ("Recipe did not contain: " + ingredientName);
 		}

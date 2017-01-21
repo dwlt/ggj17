@@ -18,8 +18,6 @@ public class Ingredient : VRTK_InteractableObject
     public string ingredientName;
 	[Tooltip("FX for when dropped in the cauldron and is in the recipe")]
 	public AudioClip cauldronCorrect;
-	[Tooltip("FX for being dropped in the cauldron and not in the recipe")]
-	public AudioClip cauldronIncorrect;
 	[Tooltip("FX for this hitting the floor")]
 	public AudioClip floorHit;
 	[Tooltip("FX for successful first grab of ingredient")]
@@ -31,7 +29,6 @@ public class Ingredient : VRTK_InteractableObject
 	// Use this for initialization
 	void Start () {
 		cauldronCorrect.LoadAudioData();
-		cauldronIncorrect.LoadAudioData();
 		floorHit.LoadAudioData();
 		successfulGrab.LoadAudioData();
 		unsuccessfulGrab.LoadAudioData();
