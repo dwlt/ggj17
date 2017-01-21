@@ -7,18 +7,15 @@ public class Cauldron : MonoBehaviour {
 	
 	private ArrayList recipe; 
 	private ArrayList ingredientTypes;
+	public GameObject theGame;
 
 	public int minRecipeSize = 3;
 	public int maxRecipeSize = 7;
 
 	// Use this for initialization
-	void Start () {
-		ingredientTypes = new ArrayList ();
-
-		initialiseIngredientTypes ();
+	void Start () {;
+		ingredientTypes = theGame.GetComponent<WizardWhite> ().ingredientTypes;
 		newRecipe ();
-		printRecipe ();
-
 	}
 	
 	// Update is called once per frame
@@ -47,9 +44,6 @@ public class Cauldron : MonoBehaviour {
 			unsuccessfulIngredient ();
 			Debug.Log ("Recipe did not contain: " + ingredientName);
 		}
-
-
-		printRecipe ();
 	}
 
 	void successfulIngredient() {
@@ -70,11 +64,7 @@ public class Cauldron : MonoBehaviour {
 		}
 	}
 
-	void initialiseIngredientTypes() {
-		ingredientTypes.Add ("Ruby");
-		ingredientTypes.Add ("Gold");
-		ingredientTypes.Add ("Quartz");
-	}
+
 
 	void printRecipe(){
 		Debug.Log ("Recipe:");
