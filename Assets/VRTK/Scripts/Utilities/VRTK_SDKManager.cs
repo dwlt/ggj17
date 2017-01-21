@@ -59,8 +59,11 @@ namespace VRTK
         public GameObject actualHeadset;
         [Tooltip("A reference to the GameObject that contains the SDK Left Hand Controller.")]
         public GameObject actualLeftController;
-        [Tooltip("A reference to the GameObject that contains the SDK Right Hand Controller.")]
+        [Tooltip("A reference to the GameObject that contains the SDK Third Hand Controller.")]
+        public GameObject actualThirdController;
+        [Tooltip("A reference to the GameObject that contains the SDK Right Hand Controllers.")]
         public GameObject actualRightController;
+
 
         [Header("Controller Aliases")]
 
@@ -68,10 +71,14 @@ namespace VRTK
         public GameObject modelAliasLeftController;
         [Tooltip("A reference to the GameObject that models for the Right Hand Controller")]
         public GameObject modelAliasRightController;
+        [Tooltip("A reference to the GameObject that models for the Third Hand Controller")]
+        public GameObject modelAliasThirdController;
         [Tooltip("A reference to the GameObject that contains any scripts that apply to the Left Hand Controller.")]
         public GameObject scriptAliasLeftController;
         [Tooltip("A reference to the GameObject that contains any scripts that apply to the Right Hand Controller.")]
         public GameObject scriptAliasRightController;
+        [Tooltip("A reference to the GameObject that contains any scripts that apply to the Third Hand Controller.")]
+        public GameObject scriptAliasThirdController;
 
         /// <summary>
         /// The GetSystemSDK method returns the selected system SDK
@@ -199,6 +206,11 @@ namespace VRTK
                 actualRightController.AddComponent<VRTK_TrackedController>();
             }
 
+            if (!actualThirdController.GetComponent<VRTK_TrackedController>())
+            {
+                actualThirdController.AddComponent<VRTK_TrackedController>();
+            }
+
             if (scriptAliasLeftController && !scriptAliasLeftController.GetComponent<VRTK_ControllerTracker>())
             {
                 scriptAliasLeftController.AddComponent<VRTK_ControllerTracker>();
@@ -207,6 +219,11 @@ namespace VRTK
             if (scriptAliasRightController && !scriptAliasRightController.GetComponent<VRTK_ControllerTracker>())
             {
                 scriptAliasRightController.AddComponent<VRTK_ControllerTracker>();
+            }
+
+            if (scriptAliasThirdController && !scriptAliasThirdController.GetComponent<VRTK_ControllerTracker>())
+            {
+                scriptAliasThirdController.AddComponent<VRTK_ControllerTracker>();
             }
         }
 

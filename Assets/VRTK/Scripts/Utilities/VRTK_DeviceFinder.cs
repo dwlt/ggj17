@@ -14,11 +14,13 @@ namespace VRTK
         /// <param name="Headset">The headset.</param>
         /// <param name="Left_Controller">The left hand controller.</param>
         /// <param name="Right_Controller">The right hand controller.</param>
+        /// /// <param name="Third_Controller">The right hand controller.</param>
         public enum Devices
         {
             Headset,
             Left_Controller,
             Right_Controller,
+            Third_Controller,
         }
 
         /// <summary>
@@ -67,6 +69,8 @@ namespace VRTK
                     return GetControllerLeftHand().transform;
                 case Devices.Right_Controller:
                     return GetControllerRightHand().transform;
+                case Devices.Third_Controller:
+                    return GetControllerThirdHand().transform;
             }
             return null;
         }
@@ -84,6 +88,8 @@ namespace VRTK
                     return SDK_BaseController.ControllerHand.Left;
                 case "right":
                     return SDK_BaseController.ControllerHand.Right;
+                case "third":
+                    return SDK_BaseController.ControllerHand.Third;
                 default:
                     return SDK_BaseController.ControllerHand.None;
             }
@@ -103,6 +109,10 @@ namespace VRTK
             else if (VRTK_SDK_Bridge.IsControllerRightHand(controller))
             {
                 return SDK_BaseController.ControllerHand.Right;
+            }
+            else if (VRTK_SDK_Bridge.IsControllerThirdHand(controller))
+            {
+                return SDK_BaseController.ControllerHand.Third;
             }
             else
             {
@@ -131,6 +141,16 @@ namespace VRTK
         }
 
         /// <summary>
+        /// The GetControllerThirdHand method retrieves the game object for the Third hand controller.
+        /// </summary>
+        /// <param name="getActual">An optional parameter that if true will return the game object that the SDK controller is attached to.</param>
+        /// <returns>The Third hand controller.</returns>
+        public static GameObject GetControllerThirdHand(bool getActual = false)
+        {
+            return VRTK_SDK_Bridge.GetControllerThirdHand(getActual);
+        }
+
+        /// <summary>
         /// The IsControllerOfHand method is used to check if a given controller game object is of the hand type provided.
         /// </summary>
         /// <param name="checkController">The actual controller object that is being checked.</param>
@@ -144,6 +164,8 @@ namespace VRTK
                     return (IsControllerLeftHand(checkController));
                 case SDK_BaseController.ControllerHand.Right:
                     return (IsControllerRightHand(checkController));
+                case SDK_BaseController.ControllerHand.Third:
+                    return (IsControllerThirdHand(checkController));
             }
 
             return false;
@@ -170,13 +192,23 @@ namespace VRTK
         }
 
         /// <summary>
+        /// The IsControllerThirdHand method is used to check if a given controller game object is the Third handed controller.
+        /// </summary>
+        /// <param name="checkController">The controller object that is being checked.</param>
+        /// <returns>Is true if the given controller is the right controller.</returns>
+        public static bool IsControllerThirdHand(GameObject checkController)
+        {
+            return VRTK_SDK_Bridge.IsControllerThirdHand(checkController);
+        }
+
+        /// <summary>
         /// The GetActualController method will attempt to get the actual SDK controller object.
         /// </summary>
         /// <param name="givenController">The GameObject of the controller.</param>
         /// <returns>The GameObject that is the actual controller.</returns>
         public static GameObject GetActualController(GameObject givenController)
         {
-            if (VRTK_SDK_Bridge.IsControllerLeftHand(givenController, true) || VRTK_SDK_Bridge.IsControllerRightHand(givenController, true))
+            if (VRTK_SDK_Bridge.IsControllerLeftHand(givenController, true) || VRTK_SDK_Bridge.IsControllerRightHand(givenController, true) || VRTK_SDK_Bridge.IsControllerThirdHand(givenController, true))
             {
                 return givenController;
             }
@@ -191,6 +223,11 @@ namespace VRTK
                 return VRTK_SDK_Bridge.GetControllerRightHand(true);
             }
 
+            if (VRTK_SDK_Bridge.IsControllerThirdHand(givenController, false))
+            {
+                return VRTK_SDK_Bridge.GetControllerThirdHand(true);
+            }
+
             return null;
         }
 
@@ -201,7 +238,7 @@ namespace VRTK
         /// <returns>The GameObject that is the alias controller containing the scripts.</returns>
         public static GameObject GetScriptAliasController(GameObject givenController)
         {
-            if (VRTK_SDK_Bridge.IsControllerLeftHand(givenController, false) || VRTK_SDK_Bridge.IsControllerRightHand(givenController, false))
+            if (VRTK_SDK_Bridge.IsControllerLeftHand(givenController, false) || VRTK_SDK_Bridge.IsControllerRightHand(givenController, false) || VRTK_SDK_Bridge.IsControllerThirdHand(givenController, false))
             {
                 return givenController;
             }
@@ -214,6 +251,11 @@ namespace VRTK
             if (VRTK_SDK_Bridge.IsControllerRightHand(givenController, true))
             {
                 return VRTK_SDK_Bridge.GetControllerRightHand(false);
+            }
+
+            if (VRTK_SDK_Bridge.IsControllerThirdHand(givenController, true))
+            {
+                return VRTK_SDK_Bridge.GetControllerThirdHand(false);
             }
 
             return null;
