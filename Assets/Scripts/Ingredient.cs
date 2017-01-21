@@ -11,11 +11,18 @@ public class Ingredient : VRTK_InteractableObject
 		Gardened, Hunted, Mined
 	}
 
-    [Header("Custom Options", order = 1)]
+    [Header("Ingredient Options", order = 1)]
 
     [Tooltip("The type of ingredient contained within this object")]
     public IngredientType ingredientType;
     public string ingredientName;
+	public AudioClip fx;
+
+	// Use this for initialization
+	void Start () {
+		fx.LoadAudioData();
+	}
+
 
     public override bool IsValidInteractableController(GameObject actualController, AllowedController controllerCheck)
     {

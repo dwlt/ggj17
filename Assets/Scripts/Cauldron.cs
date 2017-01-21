@@ -37,7 +37,13 @@ public class Cauldron : MonoBehaviour {
 	}
 
 	void checkRecipe(GameObject ingredient) {
-		string ingredientName = ingredient.GetComponent<Ingredient>().ingredientName;
+		Ingredient actualIngredient = ingredient.GetComponent<Ingredient>();
+
+		string ingredientName = actualIngredient.ingredientName;
+
+		if (actualIngredient.fx) {
+			AudioSource.PlayClipAtPoint(actualIngredient.fx, ingredient.transform.position);
+		}
 
 		if (recipe.Contains (ingredientName)) {
 			Debug.Log ("Recipe contains: " + ingredientName);
