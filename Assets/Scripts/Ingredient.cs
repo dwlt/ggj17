@@ -5,6 +5,7 @@ using VRTK;
 public class Ingredient : VRTK_InteractableObject
 {
 	private VRTK_ControllerActions controllerActions;
+	public String ingredientName;
 
 	public enum IngredientType
 	{
