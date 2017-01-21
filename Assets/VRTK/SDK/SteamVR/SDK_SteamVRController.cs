@@ -15,6 +15,7 @@ namespace VRTK
     {
         private SteamVR_TrackedObject cachedLeftTrackedObject;
         private SteamVR_TrackedObject cachedRightTrackedObject;
+        private SteamVR_TrackedObject cachedThirdTrackedObject;
         private ushort maxHapticVibration = 3999;
 
         /// <summary>
@@ -100,6 +101,11 @@ namespace VRTK
                 {
                     return (actual ? sdkManager.actualRightController : sdkManager.scriptAliasRightController);
                 }
+
+                if (cachedThirdTrackedObject != null && (uint)cachedThirdTrackedObject.index == index)
+                {
+                    return (actual ? sdkManager.actualThirdController : sdkManager.scriptAliasThirdController);
+                }
             }
             return null;
         }
@@ -160,6 +166,21 @@ namespace VRTK
         }
 
         /// <summary>
+        /// The GetControllerThirdHand method returns the GameObject containing the representation of the Third hand controller.
+        /// </summary>
+        /// <param name="actual">If true it will return the actual controller, if false it will return the script alias controller GameObject.</param>
+        /// <returns>The GameObject containing the Third hand controller.</returns>
+        public override GameObject GetControllerThirdHand(bool actual = false)
+        {
+            var controller = GetSDKManagerControllerThirdHand(actual);
+            if (!controller && actual)
+            {
+                controller = GameObject.Find("[CameraRig]/Controller (third)");
+            }
+            return controller;
+        }
+
+        /// <summary>
         /// The IsControllerLeftHand/1 method is used to check if the given controller is the the left hand controller.
         /// </summary>
         /// <param name="controller">The GameObject to check.</param>
@@ -177,6 +198,16 @@ namespace VRTK
         public override bool IsControllerRightHand(GameObject controller)
         {
             return CheckActualOrScriptAliasControllerIsRightHand(controller);
+        }
+
+        /// <summary>
+        /// The IsControllerThirdHand/1 method is used to check if the given controller is the the Third hand controller.
+        /// </summary>
+        /// <param name="controller">The GameObject to check.</param>
+        /// <returns>Returns true if the given controller is the Third hand controller.</returns>
+        public override bool IsControllerThirdHand(GameObject controller)
+        {
+            return CheckActualOrScriptAliasControllerIsThirdHand(controller);
         }
 
         /// <summary>
@@ -199,6 +230,18 @@ namespace VRTK
         public override bool IsControllerRightHand(GameObject controller, bool actual)
         {
             return CheckControllerRightHand(controller, actual);
+        }
+
+
+        /// <summary>
+        /// The IsControllerThirdHand/2 method is used to check if the given controller is the the Third hand controller.
+        /// </summary>
+        /// <param name="controller">The GameObject to check.</param>
+        /// <param name="actual">If true it will check the actual controller, if false it will check the script alias controller.</param>
+        /// <returns>Returns true if the given controller is the Third hand controller.</returns>
+        public override bool IsControllerThirdHand(GameObject controller, bool actual)
+        {
+            return CheckControllerThirdHand(controller, actual);
         }
 
         /// <summary>
@@ -228,6 +271,9 @@ namespace VRTK
                         break;
                     case ControllerHand.Right:
                         model = GameObject.Find("[CameraRig]/Controller (right)/Model");
+                        break;
+                    case ControllerHand.Third:
+                        model = GameObject.Find("[CameraRig]/Controller (third)/Model");
                         break;
                 }
             }
@@ -772,6 +818,7 @@ namespace VRTK
             {
                 cachedLeftTrackedObject = null;
                 cachedRightTrackedObject = null;
+                cachedThirdTrackedObject = null;
             }
 
             var sdkManager = VRTK_SDKManager.instance;
@@ -784,6 +831,10 @@ namespace VRTK
                 if (cachedRightTrackedObject == null && sdkManager.actualRightController)
                 {
                     cachedRightTrackedObject = sdkManager.actualRightController.GetComponent<SteamVR_TrackedObject>();
+                }
+                if (cachedThirdTrackedObject == null && sdkManager.actualThirdController)
+                {
+                    cachedThirdTrackedObject = sdkManager.actualThirdController.GetComponent<SteamVR_TrackedObject>();
                 }
             }
         }
@@ -800,6 +851,10 @@ namespace VRTK
             else if (IsControllerRightHand(controller))
             {
                 trackedObject = cachedRightTrackedObject;
+            }
+            else if (IsControllerThirdHand(controller))
+            {
+                trackedObject = cachedThirdTrackedObject;
             }
             return trackedObject;
         }

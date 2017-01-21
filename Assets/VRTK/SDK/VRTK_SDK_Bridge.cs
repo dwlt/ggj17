@@ -55,6 +55,11 @@
             return GetControllerSDK().GetControllerRightHand(actual);
         }
 
+        public static GameObject GetControllerThirdHand(bool actual)
+        {
+            return GetControllerSDK().GetControllerThirdHand(actual);
+        }
+
         public static bool IsControllerLeftHand(GameObject controller)
         {
             return GetControllerSDK().IsControllerLeftHand(controller);
@@ -65,6 +70,11 @@
             return GetControllerSDK().IsControllerRightHand(controller);
         }
 
+        public static bool IsControllerThirdHand(GameObject controller)
+        {
+            return GetControllerSDK().IsControllerThirdHand(controller);
+        }
+
         public static bool IsControllerLeftHand(GameObject controller, bool actual)
         {
             return GetControllerSDK().IsControllerLeftHand(controller, actual);
@@ -73,6 +83,11 @@
         public static bool IsControllerRightHand(GameObject controller, bool actual)
         {
             return GetControllerSDK().IsControllerRightHand(controller, actual);
+        }
+
+        public static bool IsControllerThirdHand(GameObject controller, bool actual)
+        {
+            return GetControllerSDK().IsControllerThirdHand(controller, actual);
         }
 
         public static GameObject GetControllerModel(GameObject controller)

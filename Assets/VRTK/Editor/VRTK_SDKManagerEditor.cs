@@ -41,10 +41,13 @@
             EditorGUILayout.PropertyField(serializedObject.FindProperty("actualHeadset"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("actualLeftController"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("actualRightController"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("actualThirdController"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("modelAliasLeftController"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("modelAliasRightController"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("modelAliasThirdController"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("scriptAliasLeftController"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("scriptAliasRightController"));
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("scriptAliasThirdController"));
 
             EditorGUILayout.EndVertical();
 
@@ -115,6 +118,13 @@
                 setPreviousControllerSDK = true;
             }
 
+            if (controllerSDK && (!sdkManager.actualThirdController || !previousControllerSDK || controllerSDK.GetType() != previousControllerSDK.GetType()))
+            {
+                var controllerThird = controllerSDK.GetControllerThirdHand(true);
+                sdkManager.actualThirdController = (controllerThird ? controllerThird : null);
+                setPreviousControllerSDK = true;
+            }
+
             if (controllerSDK && (!sdkManager.modelAliasLeftController || !previousControllerSDK || controllerSDK.GetType() != previousControllerSDK.GetType()))
             {
                 var controllerLeft = controllerSDK.GetControllerModel(SDK_BaseController.ControllerHand.Left);
@@ -126,6 +136,13 @@
             {
                 var controllerRight = controllerSDK.GetControllerModel(SDK_BaseController.ControllerHand.Right);
                 sdkManager.modelAliasRightController = (controllerRight ? controllerRight : null);
+                setPreviousControllerSDK = true;
+            }
+
+            if (controllerSDK && (!sdkManager.modelAliasThirdController || !previousControllerSDK || controllerSDK.GetType() != previousControllerSDK.GetType()))
+            {
+                var controllerThird = controllerSDK.GetControllerModel(SDK_BaseController.ControllerHand.Third);
+                sdkManager.modelAliasThirdController = (controllerThird ? controllerThird : null);
                 setPreviousControllerSDK = true;
             }
 

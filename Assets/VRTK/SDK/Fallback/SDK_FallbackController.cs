@@ -104,6 +104,16 @@ namespace VRTK
         }
 
         /// <summary>
+        /// The GetControllerThirdHand method returns the GameObject containing the representation of the Third hand controller.
+        /// </summary>
+        /// <param name="actual">If true it will return the actual controller, if false it will return the script alias controller GameObject.</param>
+        /// <returns>The GameObject containing the Third hand controller.</returns>
+        public override GameObject GetControllerThirdHand(bool actual = false)
+        {
+            return null;
+        }
+
+        /// <summary>
         /// The IsControllerLeftHand/1 method is used to check if the given controller is the the left hand controller.
         /// </summary>
         /// <param name="controller">The GameObject to check.</param>
@@ -119,6 +129,16 @@ namespace VRTK
         /// <param name="controller">The GameObject to check.</param>
         /// <returns>Returns true if the given controller is the right hand controller.</returns>
         public override bool IsControllerRightHand(GameObject controller)
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// The IsControllerThirdHand/1 method is used to check if the given controller is the the Third hand controller.
+        /// </summary>
+        /// <param name="controller">The GameObject to check.</param>
+        /// <returns>Returns true if the given controller is the Third hand controller.</returns>
+        public override bool IsControllerThirdHand(GameObject controller)
         {
             return false;
         }
@@ -141,6 +161,17 @@ namespace VRTK
         /// <param name="actual">If true it will check the actual controller, if false it will check the script alias controller.</param>
         /// <returns>Returns true if the given controller is the right hand controller.</returns>
         public override bool IsControllerRightHand(GameObject controller, bool actual)
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// The IsControllerThirdHand/2 method is used to check if the given controller is the the Third hand controller.
+        /// </summary>
+        /// <param name="controller">The GameObject to check.</param>
+        /// <param name="actual">If true it will check the actual controller, if false it will check the script alias controller.</param>
+        /// <returns>Returns true if the given controller is the Third hand controller.</returns>
+        public override bool IsControllerThirdHand(GameObject controller, bool actual)
         {
             return false;
         }
