@@ -128,6 +128,7 @@ namespace VRTK.GrabAttachMechanics
             grabbedSnapHandle = null;
             initialAttachPoint = null;
             controllerAttachPoint = null;
+            
         }
 
         /// <summary>
@@ -168,6 +169,10 @@ namespace VRTK.GrabAttachMechanics
         protected virtual void ForceReleaseGrab()
         {
             var grabbingObject = grabbedObjectScript.GetGrabbingObject();
+            if (grabbedObjectScript.GetType().Name == "Ingredient")
+            {
+                ((Ingredient)grabbedObjectScript).grabbingUtensil.attachedIngredient = null;
+            }
             if (grabbingObject)
             {
                 grabbingObject.GetComponent<VRTK_InteractGrab>().ForceRelease();
@@ -176,7 +181,7 @@ namespace VRTK.GrabAttachMechanics
 
         protected virtual void ReleaseObject(bool applyGrabbingObjectVelocity)
         {
-            Rigidbody releasedObjectRigidBody = ReleaseFromController(applyGrabbingObjectVelocity);
+            Rigidbody releasedObjectRigidBody = ReleaseFromController(true);
             if (releasedObjectRigidBody && applyGrabbingObjectVelocity)
             {
                 ThrowReleasedObject(releasedObjectRigidBody);

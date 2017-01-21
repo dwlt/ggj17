@@ -52,7 +52,7 @@ namespace VRTK
         private VRTK_InteractTouch interactTouch;
         private VRTK_ControllerActions controllerActions;
         private VRTK_ControllerEvents controllerEvents;
-        private int grabEnabledState = 0;
+        public int grabEnabledState = 0;
         private float grabPrecognitionTimer = 0f;
         private GameObject undroppableGrabbedObject;
 
@@ -386,6 +386,11 @@ namespace VRTK
         {
             if (CanRelease() && (IsObjectHoldOnGrab(grabbedObject) || grabEnabledState >= 2))
             {
+                if(grabbedObject.transform.GetComponent<Ingredient>())
+                {
+                    grabbedObject.transform.GetComponent<Ingredient>().grabbingUtensil.attachedIngredient = null;
+                }
+                
                 InitUngrabbedObject(true);
             }
         }

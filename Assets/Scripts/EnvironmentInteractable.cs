@@ -45,8 +45,11 @@ public class EnvironmentInteractable : VRTK_InteractableObject {
             //attach it to the utensil
             Rigidbody attachPoint = controllerActions.GetComponent<VRTK_InteractGrab>().controllerAttachPoint;
             controllerActions.GetComponent<VRTK_InteractGrab>().grabbedObject = harvestedResource;
+            controllerActions.GetComponent<VRTK_InteractGrab>().grabEnabledState++;
             harvestedResource.GetComponent<Ingredient>().grabAttachMechanicScript.StartGrab(utensil, harvestedResource, attachPoint);
+            //harvestedResource.GetComponent<Ingredient>().grabbingObjects.Add(utensil);
             utensil.GetComponent<Utensil>().attachedIngredient = harvestedResource.GetComponent<Ingredient>();
+            harvestedResource.GetComponent<Ingredient>().grabbingUtensil = utensil.GetComponent<Utensil>();
         }
     }
 
