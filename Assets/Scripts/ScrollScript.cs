@@ -8,6 +8,11 @@ public class ScrollScript : MonoBehaviour {
     public GameObject planeBottom;
     public GameObject planeWhole;
 
+	public string ingredientTop;
+	public string ingredientMiddle;
+	public string ingredientBottom;
+
+
 	// Use this for initialization
 	void Start () {
 
@@ -35,9 +40,12 @@ public class ScrollScript : MonoBehaviour {
 	public  void setPanels(string top, string middle, string bottom)
     {
         planeTop.GetComponent<Renderer>().material.mainTexture = (Texture2D) Resources.Load("Textures/" + top, typeof(Texture2D));
+		ingredientTop = top;
         planeMiddle.GetComponent<Renderer>().material.mainTexture = (Texture2D)Resources.Load("Textures/" + middle, typeof(Texture2D));
-        planeBottom.GetComponent<Renderer>().material.mainTexture = (Texture2D)Resources.Load("Textures/" + bottom, typeof(Texture2D));
-    }
+		ingredientMiddle = middle;   
+		planeBottom.GetComponent<Renderer>().material.mainTexture = (Texture2D)Resources.Load("Textures/" + bottom, typeof(Texture2D));
+		ingredientBottom = bottom;
+	}
     //Use to change the whole page canvas. Visible in wholeView
 	public void setPanels(string whole)
     {

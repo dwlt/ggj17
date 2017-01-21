@@ -9,6 +9,7 @@ public class WizardWhite : MonoBehaviour {
 	public ArrayList ingredientTypes = new ArrayList();
 
 
+
 	// Use this for initialization
 	void Start () {
 		initialiseIngredientTypes ();
@@ -25,6 +26,15 @@ public class WizardWhite : MonoBehaviour {
 		
 	}
 
+
+	public void successfulIngredient() {
+		controlScroll ();
+	}
+
+	public void unsuccessfulIngredient() {
+		Debug.Log ("game level unsuccessful");
+	}
+
 	void initialiseIngredientTypes() {
 		ingredientTypes.Add ("Ruby");
 		ingredientTypes.Add ("Gold");
@@ -32,9 +42,22 @@ public class WizardWhite : MonoBehaviour {
 	}
 
 	void controlScroll() {
-		//scroll.setPanels ("grass");
-		scroll.setPanels (cauldron.recipe[0].ToString(), cauldron.recipe[1].ToString(), cauldron.recipe[2].ToString());
+		
+		//scroll.setPanels ("MagicWhole");
 
-		scroll.panelView ();
+		if (cauldron.recipe.Count > 2) {
+			scroll.setPanels (cauldron.recipe [0].ToString (), cauldron.recipe [1].ToString (), cauldron.recipe [2].ToString ());
+			scroll.panelView ();
+		} else if (cauldron.recipe.Count > 1) {
+			scroll.setPanels (cauldron.recipe [0].ToString (), cauldron.recipe [1].ToString (), "MagicBottom");
+			scroll.panelView ();
+		} else if (cauldron.recipe.Count > 0) {
+			scroll.setPanels (cauldron.recipe [0].ToString (), "MagicMid", "MagicBottom");
+			scroll.panelView ();
+		} else {
+			scroll.setPanels ("MagicWhole");
+			scroll.wholeView();
+		}
+
 	}
 }

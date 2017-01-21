@@ -51,10 +51,12 @@ public class Cauldron : MonoBehaviour {
 
 	void successfulIngredient() {
 		Debug.Log ("whizz bang cool stuff");
+		theGame.GetComponent<WizardWhite> ().successfulIngredient ();
 	}
 
 	void unsuccessfulIngredient() {
 		Debug.Log ("crash whoop bad stuff");
+		theGame.GetComponent<WizardWhite> ().unsuccessfulIngredient ();
 	}
 
 
