@@ -37,7 +37,7 @@ public class Cauldron : MonoBehaviour {
 	}
 
 	void checkRecipe(GameObject ingredient) {
-		string ingredientName = ingredient.GetComponent<Ingredient> ().ingredientName;
+		string ingredientName = ingredient.GetComponent<Ingredient>().ingredientName;
 
 		if (recipe.Contains (ingredientName)) {
 			Debug.Log ("Recipe contains: " + ingredientName);
