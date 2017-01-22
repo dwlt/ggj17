@@ -11,8 +11,8 @@ public class Cauldron : MonoBehaviour {
     public List<string> ingredientTypes; 
     public GameObject theGame;
     private WizardWhite wizardWhite;
-
-	public int minRecipeSize = 3;
+    [Tooltip("Both recipe sizes must be > 3")]
+    public int minRecipeSize = 4;
 	public int maxRecipeSize = 7;
 
 	public AudioClip gameOverFanfare;
@@ -20,7 +20,8 @@ public class Cauldron : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
+        minRecipeSize -= 3; //3 guaranteed picks one from each category.
+        maxRecipeSize -= 3;
 		gameOverFanfare.LoadAudioData();
 		gameWonFanfare.LoadAudioData();
 
@@ -111,14 +112,21 @@ public class Cauldron : MonoBehaviour {
 	}
     
 	public void newRecipe() {
-		int recipeSize = Random.Range (minRecipeSize, maxRecipeSize);
-        Debug.Log("Recipe size: " + recipeSize.ToString() + "Number of Ingredients" + ingredientTypes.Count.ToString());
-		recipe = new List<string> (); //Reset Recipe
+        recipe = new List<string>(); //Reset Recipe
+        //Seed with one from each category
+        int[] seeded = { Random.Range(0, 4), Random.Range(5, 9), Random.Range(10, 14) };
+        for (int i = 0; i < seeded.Length; i++)
+        {
+            recipe.Add(ingredientTypes[seeded[i]]);
+            Debug.Log( "Adding: " + seeded[i].ToString() + ingredientTypes[seeded[i]]);
+        }
+
+        int recipeSize = Random.Range (minRecipeSize, maxRecipeSize);
 		for (int i = 0; i < recipeSize; i++) {
 			int nextIngredient = Random.Range (0, ingredientTypes.Count);
 			recipe.Add (ingredientTypes.ElementAt(nextIngredient));
-
 		}
+        printRecipe();
 	}
 
 	void printRecipe(){
