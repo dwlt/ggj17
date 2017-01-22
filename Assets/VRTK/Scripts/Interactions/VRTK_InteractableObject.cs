@@ -959,7 +959,7 @@ namespace VRTK
             }
 
             StopTouchingInteractions();
-            StopGrabbingInteractions();
+            //StopGrabbingInteractions();
             StopUsingInteractions();
         }
 
