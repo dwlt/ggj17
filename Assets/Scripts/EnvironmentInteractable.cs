@@ -39,17 +39,25 @@ public class EnvironmentInteractable : VRTK_InteractableObject {
         GameObject utensil = this.controllerActions.gameObject;
         //spawn my resource - try not to spawn too many - OOPS
 
-        if (!utensil.GetComponent<Utensil>().attachedIngredient || utensil.GetComponent<Utensil>().attachedIngredient.ingredientType != this.resource.GetComponent<Ingredient>().ingredientType)
+        if (tooled && (!utensil.GetComponent<Utensil>().attachedIngredient || utensil.GetComponent<Utensil>().attachedIngredient.ingredientName != this.resource.GetComponent<Ingredient>().ingredientName))
         {
+            if (utensil.GetComponent<Utensil>().attachedIngredient)
+            {
+                //drop old attached item
+                utensil.GetComponent<VRTK_InteractGrab>().grabEnabledState = 2;
+                utensil.GetComponent<VRTK_InteractGrab>().AttemptReleaseObject();
+            }
             GameObject harvestedResource = Instantiate(this.resource, transform.position, transform.rotation);
             //attach it to the utensil
             Rigidbody attachPoint = controllerActions.GetComponent<VRTK_InteractGrab>().controllerAttachPoint;
+            Debug.Log("Grabbing object"  + harvestedResource);
             controllerActions.GetComponent<VRTK_InteractGrab>().grabbedObject = harvestedResource;
             controllerActions.GetComponent<VRTK_InteractGrab>().grabEnabledState++;
             harvestedResource.GetComponent<Ingredient>().grabAttachMechanicScript.StartGrab(utensil, harvestedResource, attachPoint);
             //harvestedResource.GetComponent<Ingredient>().grabbingObjects.Add(utensil);
             utensil.GetComponent<Utensil>().attachedIngredient = harvestedResource.GetComponent<Ingredient>();
             harvestedResource.GetComponent<Ingredient>().grabbingUtensil = utensil.GetComponent<Utensil>();
+            harvestedResource.GetComponent<Ingredient>().togglePhysicsWhenGrabbed(false);
         }
     }
 

@@ -382,13 +382,14 @@ namespace VRTK
             return (grabbedObject && grabbedObject.GetComponent<VRTK_InteractableObject>().IsDroppable());
         }
 
-        private void AttemptReleaseObject()
+        public void AttemptReleaseObject()
         {
             if (CanRelease() && (IsObjectHoldOnGrab(grabbedObject) || grabEnabledState >= 2))
             {
                 if(grabbedObject.transform.GetComponent<Ingredient>())
                 {
                     grabbedObject.transform.GetComponent<Ingredient>().grabbingUtensil.attachedIngredient = null;
+                    grabbedObject.transform.GetComponent<Ingredient>().togglePhysicsWhenGrabbed(true);
                 }
                 
                 InitUngrabbedObject(true);
