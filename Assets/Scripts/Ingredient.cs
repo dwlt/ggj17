@@ -24,12 +24,15 @@ public class Ingredient : VRTK_InteractableObject
 	[Tooltip("FX for successful first grab of ingredient")]
 	public AudioClip successfulGrab;
 	private bool firstGrab; // assumes a new object each 
+	[Tooltip("FX for invalid attempt to grab")]
+	public AudioClip unsuccessfulGrab;
 
 	// Use this for initialization
 	void Start () {
 		//cauldronCorrect.LoadAudioData();
 		floorHit.LoadAudioData();
 		successfulGrab.LoadAudioData();
+		unsuccessfulGrab.LoadAudioData();
 	}
 
 	void OnCollisionEnter(Collision c) {
@@ -43,7 +46,6 @@ public class Ingredient : VRTK_InteractableObject
         this.transform.GetComponent<Collider>().enabled = physics;
     }
 
-	// this doesn't activate when you GRAB - it activates when you press trigger (or other buttons)
     public override bool IsValidInteractableController(GameObject actualController, AllowedController controllerCheck)
     {
         controllerActions = actualController.GetComponent<VRTK_ControllerActions>();
@@ -71,21 +73,16 @@ public class Ingredient : VRTK_InteractableObject
             else if (controllerActions)
             {
 	            controllerActions.TriggerHapticPulse(0.75f, 0.3f, 0.01f);
-
+				// only play sound if the sound file isn't null
+				if (unsuccessfulGrab != null)
+				{
+					AudioSource.PlayClipAtPoint(unsuccessfulGrab, transform.position);
+				}
             }
         }
         //Reaches this section only if the ingredient check doesn't match
         return false;
     }
-
-	public void playGrabbedSound(){
-
-		// only play sound if the sound file isn't null
-		if (successfulGrab)
-		{
-			AudioSource.PlayClipAtPoint(successfulGrab, transform.position);
-		}	
-	}
    
 }
 
