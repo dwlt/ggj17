@@ -13,9 +13,9 @@ public class Cauldron : MonoBehaviour {
     public GameObject thePrize;
     public GameObject failPrize;
     private WizardWhite wizardWhite;
-    [Tooltip("Both recipe sizes must be > 3")]
-    public int minRecipeSize = 4;
-	public int maxRecipeSize = 7;
+    public int recipeSize = 1;
+
+    public float remainingTime = 120f;
 
     //Correct and incorrect placements.
     public int successful = 0;
@@ -27,8 +27,7 @@ public class Cauldron : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        minRecipeSize -= 3; //3 guaranteed picks one from each category.
-        maxRecipeSize -= 3;
+        recipeSize += 2;
 		gameOverFanfare.LoadAudioData();
 		gameWonFanfare.LoadAudioData();
 
@@ -117,6 +116,19 @@ public class Cauldron : MonoBehaviour {
         //Rest of Game Logic
         Vector3 prizePos = new Vector3(0, 1.1f, 0);
         Instantiate(this.thePrize, transform.position + prizePos, transform.rotation);
+        StartCoroutine(wait_restart());
+    }
+    //Add 10 seconds to their time, 5 of which is spent looking at the result.
+    IEnumerator wait_restart()
+    {
+        this.remainingTime += 10.0f;
+        yield return new WaitForSeconds(5);
+        this.Start();
+    }
+    IEnumerator wait_finished()
+    {
+        yield return new WaitForSeconds(10);
+        
     }
     //Fail state for some reason
     public void GameLost()
