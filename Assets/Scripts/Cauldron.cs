@@ -11,6 +11,7 @@ public class Cauldron : MonoBehaviour {
     public List<string> ingredientTypes; 
     public GameObject theGame;
     public GameObject thePrize;
+    public GameObject failPrize;
     private WizardWhite wizardWhite;
     [Tooltip("Both recipe sizes must be > 3")]
     public int minRecipeSize = 4;
@@ -118,6 +119,8 @@ public class Cauldron : MonoBehaviour {
         {
             AudioSource.PlayClipAtPoint(gameOverFanfare, transform.position);
         }
+        GameObject fp = Instantiate(this.failPrize, transform.position , transform.rotation);
+        fp.GetComponent<ObjectConfetti>().launchObjects();
     }
 
 	void successfulIngredient() {

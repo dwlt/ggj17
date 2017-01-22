@@ -44,6 +44,11 @@ ModelImporter:
     100072: //RootNode
     100074: TreeStem
     100076: TreeTop
+    100078: Fruit_Body5
+    100080: Fruit_Body6
+    100082: Fruit_Body7
+    100084: TreeTop_MeshPart0
+    100086: TreeTop_MeshPart1
     400000: FlowerBod1
     400002: FlowerBod2
     400004: FlowerBod3
@@ -83,6 +88,11 @@ ModelImporter:
     400072: //RootNode
     400074: TreeStem
     400076: TreeTop
+    400078: Fruit_Body5
+    400080: Fruit_Body6
+    400082: Fruit_Body7
+    400084: TreeTop_MeshPart0
+    400086: TreeTop_MeshPart1
     2300000: FlowerBod1
     2300002: FlowerBod2
     2300004: FlowerBod3
@@ -119,6 +129,11 @@ ModelImporter:
     2300066: Fruit_Body4
     2300068: TreeStem
     2300070: TreeTop
+    2300072: Fruit_Body5
+    2300074: Fruit_Body6
+    2300076: Fruit_Body7
+    2300078: TreeTop_MeshPart0
+    2300080: TreeTop_MeshPart1
     3300000: FlowerBod1
     3300002: FlowerBod2
     3300004: FlowerBod3
@@ -155,6 +170,11 @@ ModelImporter:
     3300066: Fruit_Body4
     3300068: TreeStem
     3300070: TreeTop
+    3300072: Fruit_Body5
+    3300074: Fruit_Body6
+    3300076: Fruit_Body7
+    3300078: TreeTop_MeshPart0
+    3300080: TreeTop_MeshPart1
     4300000: TreeStem
     4300002: TreeTop
     4300004: FlowerBod1
@@ -191,6 +211,11 @@ ModelImporter:
     4300066: Fruit_Body2
     4300068: Fruit_Body3
     4300070: Fruit_Body4
+    4300072: TreeTop_MeshPart0
+    4300074: TreeTop_MeshPart1
+    4300076: Fruit_Body5
+    4300078: Fruit_Body6
+    4300080: Fruit_Body7
     7400000: Take 001
     9500000: //RootNode
   materials:

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ObjectConfetti : MonoBehaviour {
     public Rigidbody toLaunch;
+    public int confettis = 10;
+    public Vector3 rangeForConf;
     // Use this for initialization
     void Start()
     {
@@ -16,7 +18,7 @@ public class ObjectConfetti : MonoBehaviour {
 
     public void launchObjects()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < confettis; i++)
         {
             Rigidbody instance = Instantiate(toLaunch, transform);
             GetRandomUpwardsVelocity(instance);
@@ -25,6 +27,6 @@ public class ObjectConfetti : MonoBehaviour {
 
     private void GetRandomUpwardsVelocity(Rigidbody toLaunch)
     {
-        toLaunch.velocity = new Vector3(Random.Range(0, 3), Random.Range(0, 10), Random.Range(0, 3));
+        toLaunch.velocity = new Vector3(Random.Range(0, rangeForConf.x), Random.Range(1, rangeForConf.y), Random.Range(0, rangeForConf.z));
     }
 }
