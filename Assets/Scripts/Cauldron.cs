@@ -86,7 +86,7 @@ public class Cauldron : MonoBehaviour {
 				AudioSource.PlayClipAtPoint(actualIngredient.cauldronCorrect, ingredient.transform.position);
 			}
 
-			if (recipe.Count = 0) {
+			if (recipe.Count == 0) {
                 GameWon();
 			}
 		} else {
