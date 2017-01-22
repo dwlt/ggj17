@@ -62,7 +62,8 @@ public class Ingredient : VRTK_InteractableObject
                 {
                     controllerActions.TriggerHapticPulse(0.5f);
                 }
-				if (successfulGrab)
+				// only play sound if the sound file isn't null
+				if (successfulGrab != null)
 				{
 					AudioSource.PlayClipAtPoint(successfulGrab, transform.position);
 				}
@@ -72,7 +73,8 @@ public class Ingredient : VRTK_InteractableObject
             else if (controllerActions)
             {
 	            controllerActions.TriggerHapticPulse(0.75f, 0.3f, 0.01f);
-				if (unsuccessfulGrab)
+				// only play sound if the sound file isn't null
+				if (unsuccessfulGrab != null)
 				{
 					AudioSource.PlayClipAtPoint(unsuccessfulGrab, transform.position);
 				}
