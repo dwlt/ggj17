@@ -203,6 +203,7 @@ namespace VRTK.GrabAttachMechanics
         {
             if (grabbedObjectScript)
             {
+                grabbedObjectScript.PauseCollisions(0.5f);
                 var grabbingObject = grabbedObjectScript.GetGrabbingObject();
                 if (grabbingObject)
                 {
@@ -218,11 +219,14 @@ namespace VRTK.GrabAttachMechanics
 
                     if (origin != null)
                     {
+                        
+                        Debug.Log("good Throw Colin!");
                         objectRigidbody.velocity = origin.TransformVector(velocity) * (grabbingObjectThrowMultiplier * throwMultiplier);
                         objectRigidbody.angularVelocity = origin.TransformDirection(angularVelocity);
                     }
                     else
                     {
+                        Debug.Log("BAD BAD BAD Throw!");
                         objectRigidbody.velocity = velocity * (grabbingObjectThrowMultiplier * throwMultiplier);
                         objectRigidbody.angularVelocity = angularVelocity;
                     }
