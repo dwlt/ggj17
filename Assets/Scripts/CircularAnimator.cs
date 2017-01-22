@@ -16,7 +16,7 @@ public class CircularAnimator : MonoBehaviour
 
     public bool Clockwise = true;
 
-    private Vector2 _centre;
+    private Vector3 _centre;
     private float _angle;
 
     private void Start()
@@ -32,7 +32,8 @@ public class CircularAnimator : MonoBehaviour
         var x = Mathf.Sin(_angle) * RotateRadiusX;
         var z = Mathf.Cos(_angle) * RotateRadiusZ;
 
-        transform.position = _centre + new Vector2(x, z);
+
+        transform.position = _centre + new Vector3(x, z, 0);
     }
 
     /*void OnDrawGizmos()
