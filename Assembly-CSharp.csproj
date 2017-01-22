@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\LazySusan.cs" />
+     <Compile Include="Assets\ObjectConfetti.cs" />
      <Compile Include="Assets\Scripts\Cauldron.cs" />
      <Compile Include="Assets\Scripts\CircularAnimator.cs" />
      <Compile Include="Assets\Scripts\EnvironmentInteractable.cs" />

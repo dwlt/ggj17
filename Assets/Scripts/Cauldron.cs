@@ -127,6 +127,7 @@ public class Cauldron : MonoBehaviour {
     }
     IEnumerator wait_finished()
     {
+        GameLost();
         yield return new WaitForSeconds(10);
         
     }
@@ -165,8 +166,6 @@ public class Cauldron : MonoBehaviour {
             recipe.Add(ingredientTypes[seeded[i]]);
             Debug.Log( "Adding: " + seeded[i].ToString() + ingredientTypes[seeded[i]]);
         }
-
-        int recipeSize = Random.Range (minRecipeSize, maxRecipeSize);
 		for (int i = 0; i < recipeSize; i++) {
 			int nextIngredient = Random.Range (0, ingredientTypes.Count);
 			recipe.Add (ingredientTypes.ElementAt(nextIngredient));
