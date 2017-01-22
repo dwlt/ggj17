@@ -7,11 +7,30 @@ ModelImporter:
   fileIDToRecycleName:
     100000: //RootNode
     100002: Cave 1
+    100004: Cave
+    100006: Ground
+    100008: Hallway1
+    100010: Hallway2
     400000: //RootNode
     400002: Cave 1
+    400004: Cave
+    400006: Ground
+    400008: Hallway1
+    400010: Hallway2
     2300000: Cave 1
+    2300002: Cave
+    2300004: Ground
+    2300006: Hallway1
+    2300008: Hallway2
     3300000: Cave 1
+    3300002: Cave
+    3300004: Ground
+    3300006: Hallway1
+    3300008: Hallway2
     4300000: Cave
+    4300002: Ground
+    4300004: Hallway1
+    4300006: Hallway2
     9500000: //RootNode
   materials:
     importMaterials: 1
