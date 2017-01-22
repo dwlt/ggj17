@@ -24,6 +24,7 @@ public class Ingredient : VRTK_InteractableObject
 	[Tooltip("FX for successful first grab of ingredient")]
 	public AudioClip successfulGrab;
 	private bool firstGrab; // assumes a new object each 
+    public bool hasBeenChecked = false;
 	
 
 	// Use this for initialization

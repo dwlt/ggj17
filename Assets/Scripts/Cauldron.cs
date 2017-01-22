@@ -68,7 +68,7 @@ public class Cauldron : MonoBehaviour {
 		if (other.gameObject.tag == "ingredient") {
             checkRecipe(other.gameObject);
             Destroy (other.gameObject);
-            Physics.IgnoreCollision(other.GetComponent<Collider>(), GetComponent<Collider>());
+           
 
 
         } else {
@@ -76,29 +76,35 @@ public class Cauldron : MonoBehaviour {
 		}
 	}
 
-	void checkRecipe(GameObject ingredient) {
-		Ingredient actualIngredient = ingredient.GetComponent<Ingredient>();
-		string ingredientName = actualIngredient.ingredientName;
-        //The Active set is the first 3 elements of the recipe list
-		if (this.recipe.Take(3).Contains (ingredientName)) {
-			Debug.Log ("Recipe contains: " + ingredientName);
-			recipe.Remove (ingredientName); //Always removes the first instance in list
-            wizardWhite.controlScroll();
-			successfulIngredient ();
-			if (actualIngredient.cauldronCorrect) {
-				AudioSource.PlayClipAtPoint(actualIngredient.cauldronCorrect, ingredient.transform.position);
-			}
+    void checkRecipe(GameObject ingredient) {
+        Ingredient actualIngredient = ingredient.GetComponent<Ingredient>();
 
-			if (recipe.Count == 0) {
-                GameWon();
-			}
-		} else {
-			unsuccessfulIngredient ();
-			if (gameOverFanfare) {
-				AudioSource.PlayClipAtPoint(gameOverFanfare, ingredient.transform.position);
-			}
-			Debug.Log ("Recipe did not contain: " + ingredientName);
-		}
+        if (!actualIngredient.hasBeenChecked)
+            {
+            actualIngredient.hasBeenChecked = true;
+            string ingredientName = actualIngredient.ingredientName;
+            //The Active set is the first 3 elements of the recipe list
+            if (this.recipe.Take(3).Contains(ingredientName)) {
+                Debug.Log("Recipe contains: " + ingredientName);
+                recipe.Remove(ingredientName); //Always removes the first instance in list
+                wizardWhite.controlScroll();
+                successfulIngredient();
+                if (actualIngredient.cauldronCorrect) {
+                    AudioSource.PlayClipAtPoint(actualIngredient.cauldronCorrect, ingredient.transform.position);
+                }
+
+                if (recipe.Count == 0) {
+                    GameWon();
+                }
+            } else {
+                unsuccessfulIngredient();
+                if (gameOverFanfare) {
+                    AudioSource.PlayClipAtPoint(gameOverFanfare, ingredient.transform.position);
+                }
+                Debug.Log("Recipe did not contain: " + ingredientName);
+            }
+        }
+    
 	}
 
     //Success State when cleared the recipe book.
