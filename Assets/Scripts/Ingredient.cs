@@ -24,15 +24,12 @@ public class Ingredient : VRTK_InteractableObject
 	[Tooltip("FX for successful first grab of ingredient")]
 	public AudioClip successfulGrab;
 	private bool firstGrab; // assumes a new object each 
-	[Tooltip("FX for invalid attempt to grab")]
-	public AudioClip unsuccessfulGrab;
 
 	// Use this for initialization
 	void Start () {
 		//cauldronCorrect.LoadAudioData();
 		floorHit.LoadAudioData();
 		successfulGrab.LoadAudioData();
-		unsuccessfulGrab.LoadAudioData();
 	}
 
 	void OnCollisionEnter(Collision c) {
@@ -74,11 +71,7 @@ public class Ingredient : VRTK_InteractableObject
             else if (controllerActions)
             {
 	            controllerActions.TriggerHapticPulse(0.75f, 0.3f, 0.01f);
-				// only play sound if the sound file isn't null
-				if (unsuccessfulGrab != null)
-				{
-					AudioSource.PlayClipAtPoint(unsuccessfulGrab, transform.position);
-				}
+
             }
         }
         //Reaches this section only if the ingredient check doesn't match

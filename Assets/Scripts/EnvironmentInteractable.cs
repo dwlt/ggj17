@@ -88,11 +88,9 @@ public class EnvironmentInteractable : VRTK_InteractableObject {
             {
                 controllerActions.TriggerHapticPulse(0.75f, 0.3f, 0.01f);
 			}			
-			// only play sound if the sound file isn't null
-			/*if (unsuccessfulGrab != null && !goodGrab)
-			{
-				AudioSource.PlayClipAtPoint(unsuccessfulGrab, transform.position);
-			}*/
+
+			utensil.playUnsuccessfulGrabSound ();	
+
 
         }
         //Reaches this section only if the ingredient check doesn't match
