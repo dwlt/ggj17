@@ -34,17 +34,17 @@ public class Cauldron : MonoBehaviour {
             "Quartz",
             "Diamond",
             //Huntables
-            "Ear",
+            "Eye",//"Ear",
             "Eye",
-            "Feather",
-            "Horn",
-            "Bone",
+            "Eye",//"Feather",
+           "Eye",// "Horn",
+           "Eye",// "Bone",
             //Gatherables
             "Fruit",
             "Flower",
-            "Venus",
+            "Fruit",//"Venus",
             "Herb",
-            "Root",
+            "Flower",//"Root",
         };
         newRecipe();
         wizardWhite = theGame.GetComponent<WizardWhite>();
