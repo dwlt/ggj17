@@ -288,6 +288,11 @@ namespace VRTK
             }
         }
 
+
+        public void OnTriggerEnter(Collider collider)
+        {
+            Debug.Log("Something hit me" + collider.name);
+        }
         /// <summary>
         /// The StopTouching method is called automatically when the object has stopped being touched. It is also a virtual method to allow for overriding in inherited classes.
         /// </summary>

@@ -53,7 +53,7 @@ namespace VRTK
         private List<Collider> touchedObjectActiveColliders = new List<Collider>();
         private VRTK_ControllerEvents controllerEvents;
         private VRTK_ControllerActions controllerActions;
-        private GameObject controllerCollisionDetector;
+        protected GameObject controllerCollisionDetector;
         private bool triggerRumble;
         private bool destroyColliderOnDisable;
         private bool triggerIsColliding = false;
@@ -459,7 +459,7 @@ namespace VRTK
             return false;
         }
 
-        private void CreateTouchCollider()
+        protected virtual void CreateTouchCollider()
         {
             if (customRigidbodyObject == null)
             {
