@@ -10,6 +10,7 @@ public class Cauldron : MonoBehaviour {
                                 //Intention is for the working set to be the first 3 elements
     public List<string> ingredientTypes; 
     public GameObject theGame;
+    public GameObject thePrize;
     private WizardWhite wizardWhite;
     [Tooltip("Both recipe sizes must be > 3")]
     public int minRecipeSize = 4;
@@ -85,7 +86,7 @@ public class Cauldron : MonoBehaviour {
 				AudioSource.PlayClipAtPoint(actualIngredient.cauldronCorrect, ingredient.transform.position);
 			}
 
-			if (recipe.Count == 0) {
+			if (recipe.Count = 0) {
                 GameWon();
 			}
 		} else {
@@ -101,9 +102,12 @@ public class Cauldron : MonoBehaviour {
     public void GameWon()
     {
         if (this.gameWonFanfare) {
+
             AudioSource.PlayClipAtPoint(gameWonFanfare, transform.position);
         }
         //Rest of Game Logic
+        Vector3 prizePos = new Vector3(0, 1.1f, 0);
+        GameObject prize = Instantiate(this.thePrize, transform.position + prizePos, transform.rotation);
     }
     //Fail state for some reason
     public void GameLost()
