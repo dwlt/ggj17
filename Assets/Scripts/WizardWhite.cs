@@ -6,7 +6,9 @@ public class WizardWhite : MonoBehaviour {
 	public Cauldron cauldron;
 	public ScrollScript scroll;
 
-	public ArrayList ingredientTypes = new ArrayList();
+	public ArrayList ingredientMined = new ArrayList();
+	public ArrayList ingredientGardened = new ArrayList();
+	public ArrayList ingredientHunted = new ArrayList();
 
 
 
@@ -36,9 +38,23 @@ public class WizardWhite : MonoBehaviour {
 	}
 
 	void initialiseIngredientTypes() {
-		ingredientTypes.Add ("Ruby");
-		ingredientTypes.Add ("Gold");
-		ingredientTypes.Add ("Quartz");
+		ingredientMined.Add ("Ruby");
+		ingredientMined.Add ("Gold");
+		ingredientMined.Add ("Quartz");
+		ingredientMined.Add ("Sapphire");
+		ingredientMined.Add ("Diamond");
+
+		ingredientHunted.Add ("Bone");
+		ingredientHunted.Add ("Ear");
+		ingredientHunted.Add ("Eye");
+		ingredientHunted.Add ("Horn");
+		//ingredientHunted.Add ("Diamond");
+
+		ingredientGardened.Add ("Flower");
+		ingredientGardened.Add ("Fruit");
+		ingredientGardened.Add ("Herb");
+		ingredientGardened.Add ("Root");
+		ingredientGardened.Add ("Venus");
 	}
 
 	void controlScroll() {
