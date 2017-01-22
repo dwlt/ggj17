@@ -6,7 +6,6 @@ using UnityEngine;
 public class Cauldron : MonoBehaviour {
 	
 	public ArrayList recipe; 
-	private ArrayList ingredientTypes;
 	public GameObject theGame;
 
 	public int minRecipeSize = 3;
@@ -22,7 +21,6 @@ public class Cauldron : MonoBehaviour {
 	}
 
 	public void init() {
-		ingredientTypes = theGame.GetComponent<WizardWhite> ().ingredientTypes;
 	}
 	
 	// Update is called once per frame
@@ -77,12 +75,22 @@ public class Cauldron : MonoBehaviour {
 
 
 	public void newRecipe() {
-		int recipeSize = Random.Range (minRecipeSize, maxRecipeSize);
+		int recipeSize = 3;// Random.Range (minRecipeSize, maxRecipeSize);
 		recipe = new ArrayList ();
-		for (int ingNum = 0; ingNum < recipeSize; ingNum++) {
-			int nextIngredient = Random.Range (0, ingredientTypes.Count);
-			recipe.Add (ingredientTypes [nextIngredient]);
+
+		WizardWhite ww = (WizardWhite)theGame.GetComponent<WizardWhite> ();
+
+		// let's guarantee something for everyone to do
+		recipe.Add( ww.ingredientMined[Random.Range(0, ww.ingredientMined.Count)] );
+		recipe.Add( ww.ingredientGardened[Random.Range(0, ww.ingredientGardened.Count)] );
+		recipe.Add( ww.ingredientHunted[Random.Range(0, ww.ingredientHunted.Count)] );
+			
+		for (int ingNum = 3; ingNum < recipeSize; ingNum++) {
+			int nextIngredient = Random.Range (0, ww.ingredientMined.Count);
+			recipe.Add (ww.ingredientMined [nextIngredient]);
 		}
+
+		printRecipe();
 	}
 
 
