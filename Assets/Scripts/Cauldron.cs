@@ -120,7 +120,7 @@ public class Cauldron : MonoBehaviour {
             } else {
                 unsuccessfulIngredient();
                 if (gameOverFanfare) {
-                    AudioSource.PlayClipAtPoint(gameOverFanfare, ingredient.transform.position);
+                    //AudioSource.PlayClipAtPoint(gameOverFanfare, ingredient.transform.position);
                 }
                 Debug.Log("Recipe did not contain: " + ingredientName);
             }
@@ -139,7 +139,7 @@ public class Cauldron : MonoBehaviour {
         Vector3 prizePos = new Vector3(0, 1.1f, 0);
         giantHead = Instantiate(this.thePrize, transform.position + prizePos, transform.rotation);
         this.remainingTime += 10.0f;
-        Invoke("wait_restart", 5.0f);
+        Invoke("wait_restart", 8.0f);
     }
     //Add 10 seconds to their time, 5 of which is spent looking at the result.
     void wait_restart()
@@ -178,7 +178,9 @@ public class Cauldron : MonoBehaviour {
         {
             AudioSource.PlayClipAtPoint(gameOverFanfare, transform.position);
         }
-        GameObject fp = Instantiate(this.failPrize, transform.position , transform.rotation);
+        Vector3 prizePos = new Vector3(0, 2.1f, 0);
+       
+        GameObject fp = Instantiate(this.failPrize, transform.position + prizePos , transform.rotation);
         fp.GetComponent<ObjectConfetti>().launchObjects();
         // StartCoroutine(wait_finished());
         inwait_finished();
