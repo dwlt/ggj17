@@ -58,6 +58,8 @@ public class EnvironmentInteractable : VRTK_InteractableObject {
             utensil.GetComponent<Utensil>().attachedIngredient = harvestedResource.GetComponent<Ingredient>();
             harvestedResource.GetComponent<Ingredient>().grabbingUtensil = utensil.GetComponent<Utensil>();
             harvestedResource.GetComponent<Ingredient>().togglePhysicsWhenGrabbed(false);
+            // make the resource exclaim its joy at being included in a recipe
+            harvestedResource.GetComponent<Ingredient>().playGrabbedSound();
         }
     }
 
@@ -65,9 +67,9 @@ public class EnvironmentInteractable : VRTK_InteractableObject {
     {
         controllerActions = actualController.GetComponent<VRTK_ControllerActions>();
         Utensil utensil = actualController.GetComponent<Utensil>();
-
+        // this triggers when utensil hits a resource object
         if (utensil)
-        {
+        {// is this the correct tool for this thing we are trying to grab?
             if ((ingredientType == IngredientType.Mined && Utensil.UtensilType.Pickaxe == utensil.utensilType) ||
                 (ingredientType == IngredientType.Hunted && Utensil.UtensilType.Knife == utensil.utensilType) ||
                 (ingredientType == IngredientType.Gardened && Utensil.UtensilType.Shears == utensil.utensilType))
@@ -85,6 +87,13 @@ public class EnvironmentInteractable : VRTK_InteractableObject {
                 controllerActions.TriggerHapticPulse(0.75f, 0.3f, 0.01f);
             }
         }
+        // only play sound if the sound file isn't null
+        /*if (unsuccessfulGrab != null && !goodGrab)
+        {
+            AudioSource.PlayClipAtPoint(unsuccessfulGrab, transform.position);
+        }*/
+        utensil.playUnsuccessfulGrabSound();
+    
         //Reaches this section only if the ingredient check doesn't match
         return false;
     }
