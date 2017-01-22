@@ -65,10 +65,12 @@ public class Cauldron : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.tag == "ingredient") {
-			Destroy (other.gameObject);
-			checkRecipe (other.gameObject);
+            checkRecipe(other.gameObject);
+            Destroy (other.gameObject);
+            Physics.IgnoreCollision(other.GetComponent<Collider>(), GetComponent<Collider>());
 
-		} else {
+
+        } else {
 			//Debug.Log ("Not Ingredient: " + other.gameObject.ToString ());
 		}
 	}
