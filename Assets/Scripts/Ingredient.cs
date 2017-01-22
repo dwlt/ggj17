@@ -46,6 +46,7 @@ public class Ingredient : VRTK_InteractableObject
         this.transform.GetComponent<Collider>().enabled = physics;
     }
 
+	// this doesn't activate when you GRAB - it activates when you press trigger (or other buttons)
     public override bool IsValidInteractableController(GameObject actualController, AllowedController controllerCheck)
     {
         controllerActions = actualController.GetComponent<VRTK_ControllerActions>();
@@ -83,6 +84,15 @@ public class Ingredient : VRTK_InteractableObject
         //Reaches this section only if the ingredient check doesn't match
         return false;
     }
+
+	public void playGrabbedSound(){
+
+		// only play sound if the sound file isn't null
+		if (successfulGrab)
+		{
+			AudioSource.PlayClipAtPoint(successfulGrab, transform.position);
+		}	
+	}
    
 }
 
