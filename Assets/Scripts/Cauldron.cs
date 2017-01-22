@@ -14,10 +14,11 @@ public class Cauldron : MonoBehaviour {
     public GameObject theGame;
     public GameObject thePrize;
     public GameObject failPrize;
+    public TextMesh clockMesh;
     public float remainingTime = 120.0f;
     private WizardWhite wizardWhite;
     public int recipeSize = 1;
-
+    private GameObject giantHead; 
 
     //Correct and incorrect placements.
     public int successful = 0;
@@ -65,8 +66,11 @@ public class Cauldron : MonoBehaviour {
         this.remainingTime -= Time.deltaTime;
         if (this.remainingTime < 0)
         {
+            this.remainingTime = 11.0f;
             GameLost();
         }
+        string timerepresentation = ((int)this.remainingTime).ToString();
+        this.clockMesh.text = timerepresentation;
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -118,16 +122,19 @@ public class Cauldron : MonoBehaviour {
         }
         //Rest of Game Logic
         Vector3 prizePos = new Vector3(0, 1.1f, 0);
-        Instantiate(this.thePrize, transform.position + prizePos, transform.rotation);
-        StartCoroutine(wait_restart());
+        giantHead = Instantiate(this.thePrize, transform.position + prizePos, transform.rotation);
+        this.remainingTime += 10.0f;
+        Invoke("wait_restart", 5.0f);
     }
     //Add 10 seconds to their time, 5 of which is spent looking at the result.
-    IEnumerator wait_restart()
+    void wait_restart()
     {
-        this.remainingTime += 10.0f;
-        yield return new WaitForSeconds(5);
-        this.Start();
+        Destroy(giantHead);
+        Start();
     }
+
+   
+
     IEnumerator wait_finished()
     {
         Debug.Log("Correct placements: " + this.successful.ToString());
@@ -135,6 +142,20 @@ public class Cauldron : MonoBehaviour {
         yield return new WaitForSeconds(10); //Wait 10
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); //Reload scene
     }
+
+    void inwait_finished()
+    {
+        Debug.Log("Correct placements: " + this.successful.ToString());
+        Debug.Log("Failed placements: " + this.unsuccessful.ToString());
+        Invoke("changeSceneTest", 10);
+       
+    }
+
+    void changeSceneTest()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); //Reload scene
+    }
+
     //Fail state for some reason
     public void GameLost()
     {
@@ -144,7 +165,8 @@ public class Cauldron : MonoBehaviour {
         }
         GameObject fp = Instantiate(this.failPrize, transform.position , transform.rotation);
         fp.GetComponent<ObjectConfetti>().launchObjects();
-        StartCoroutine(wait_finished());
+        // StartCoroutine(wait_finished());
+        inwait_finished();
     }
 
 	void successfulIngredient() {
