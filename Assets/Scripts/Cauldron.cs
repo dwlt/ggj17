@@ -15,6 +15,11 @@ public class Cauldron : MonoBehaviour {
     public int minRecipeSize = 4;
 	public int maxRecipeSize = 7;
 
+    //Correct and incorrect placements.
+    public int successful = 0;
+    public int unsuccessful = 0;
+    public int maxfails = 3;
+
 	public AudioClip gameOverFanfare;
 	public AudioClip gameWonFanfare;
 
@@ -96,17 +101,30 @@ public class Cauldron : MonoBehaviour {
     public void GameWon()
     {
         if (this.gameWonFanfare) {
-            AudioSource.PlayClipAtPoint(gameOverFanfare, transform.position);
+            AudioSource.PlayClipAtPoint(gameWonFanfare, transform.position);
         }
         //Rest of Game Logic
     }
+    //Fail state for some reason
+    public void GameLost()
+    {
+        if (this.gameOverFanfare)
+        {
+            AudioSource.PlayClipAtPoint(gameOverFanfare, transform.position);
+        }
+    }
 
 	void successfulIngredient() {
+        this.successful++;
 		Debug.Log ("whizz bang cool stuff");
 		theGame.GetComponent<WizardWhite> ().successfulIngredient ();
 	}
 
 	void unsuccessfulIngredient() {
+        this.unsuccessful++;
+        if (this.unsuccessful >= this.maxfails) {
+            GameLost();
+        }
 		Debug.Log ("crash whoop bad stuff");
 		theGame.GetComponent<WizardWhite> ().unsuccessfulIngredient ();
 	}
