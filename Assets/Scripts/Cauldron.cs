@@ -1,14 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 // this component should live on whatever the surface of the couldron is, not the cauldron shell
 public class Cauldron : MonoBehaviour {
 	
-	public ArrayList recipe; 
-	public GameObject theGame;
-
-	public int minRecipeSize = 3;
+	public List<string> recipe; //Contains string representations of everything the cauldron needs
+                                //Intention is for the working set to be the first 3 elements
+    public List<string> ingredientTypes; 
+    public GameObject theGame;
+    private WizardWhite wizardWhite;
+    [Tooltip("Both recipe sizes must be > 3")]
+    public int minRecipeSize = 4;
 	public int maxRecipeSize = 7;
 
 	public AudioClip gameOverFanfare;
@@ -16,12 +20,37 @@ public class Cauldron : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        minRecipeSize -= 3; //3 guaranteed picks one from each category.
+        maxRecipeSize -= 3;
 		gameOverFanfare.LoadAudioData();
 		gameWonFanfare.LoadAudioData();
-	}
 
-	public void init() {
-	}
+        this.ingredientTypes = new List<string>
+        {
+            //Mineables
+            "Sapphire",
+            "Gold",
+            "Emerald",
+            "Quartz",
+            "Diamond",
+            //Huntables
+            "Ear",
+            "Eye",
+            "Feather",
+            "Horn",
+            "Bone",
+            //Gatherables
+            "Fruit",
+            "Flower",
+            "Venus",
+            "Herb",
+            "Root",
+        };
+        newRecipe();
+        wizardWhite = theGame.GetComponent<WizardWhite>();
+        wizardWhite.controlScroll();
+    }
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -40,19 +69,19 @@ public class Cauldron : MonoBehaviour {
 
 	void checkRecipe(GameObject ingredient) {
 		Ingredient actualIngredient = ingredient.GetComponent<Ingredient>();
-
 		string ingredientName = actualIngredient.ingredientName;
-
-		if (recipe.Contains (ingredientName)) {
+        //The Active set is the first 3 elements of the recipe list
+		if (this.recipe.Take(3).Contains (ingredientName)) {
 			Debug.Log ("Recipe contains: " + ingredientName);
-			recipe.Remove (ingredientName);
+			recipe.Remove (ingredientName); //Always removes the first instance in list
+            wizardWhite.controlScroll();
 			successfulIngredient ();
 			if (actualIngredient.cauldronCorrect) {
 				AudioSource.PlayClipAtPoint(actualIngredient.cauldronCorrect, ingredient.transform.position);
 			}
 
-			if (recipe.Count == 0 && gameWonFanfare) {
-				AudioSource.PlayClipAtPoint(gameWonFanfare, transform.position);
+			if (recipe.Count == 0) {
+                GameWon();
 			}
 		} else {
 			unsuccessfulIngredient ();
@@ -63,6 +92,15 @@ public class Cauldron : MonoBehaviour {
 		}
 	}
 
+    //Success State when cleared the recipe book.
+    public void GameWon()
+    {
+        if (this.gameWonFanfare) {
+            AudioSource.PlayClipAtPoint(gameOverFanfare, transform.position);
+        }
+        //Rest of Game Logic
+    }
+
 	void successfulIngredient() {
 		Debug.Log ("whizz bang cool stuff");
 		theGame.GetComponent<WizardWhite> ().successfulIngredient ();
@@ -72,28 +110,24 @@ public class Cauldron : MonoBehaviour {
 		Debug.Log ("crash whoop bad stuff");
 		theGame.GetComponent<WizardWhite> ().unsuccessfulIngredient ();
 	}
-
-
+    
 	public void newRecipe() {
-		int recipeSize = 3;// Random.Range (minRecipeSize, maxRecipeSize);
-		recipe = new ArrayList ();
+        recipe = new List<string>(); //Reset Recipe
+        //Seed with one from each category
+        int[] seeded = { Random.Range(0, 4), Random.Range(5, 9), Random.Range(10, 14) };
+        for (int i = 0; i < seeded.Length; i++)
+        {
+            recipe.Add(ingredientTypes[seeded[i]]);
+            Debug.Log( "Adding: " + seeded[i].ToString() + ingredientTypes[seeded[i]]);
+        }
 
-		WizardWhite ww = (WizardWhite)theGame.GetComponent<WizardWhite> ();
-
-		// let's guarantee something for everyone to do
-		recipe.Add( ww.ingredientMined[Random.Range(0, ww.ingredientMined.Count)] );
-		recipe.Add( ww.ingredientGardened[Random.Range(0, ww.ingredientGardened.Count)] );
-		recipe.Add( ww.ingredientHunted[Random.Range(0, ww.ingredientHunted.Count)] );
-			
-		for (int ingNum = 3; ingNum < recipeSize; ingNum++) {
-			int nextIngredient = Random.Range (0, ww.ingredientMined.Count);
-			recipe.Add (ww.ingredientMined [nextIngredient]);
+        int recipeSize = Random.Range (minRecipeSize, maxRecipeSize);
+		for (int i = 0; i < recipeSize; i++) {
+			int nextIngredient = Random.Range (0, ingredientTypes.Count);
+			recipe.Add (ingredientTypes.ElementAt(nextIngredient));
 		}
-
-		printRecipe();
+        printRecipe();
 	}
-
-
 
 	void printRecipe(){
 		Debug.Log ("Recipe:");

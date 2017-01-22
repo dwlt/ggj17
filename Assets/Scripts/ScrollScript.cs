@@ -38,9 +38,6 @@ public class ScrollScript : MonoBehaviour {
     //Set textures for the constituent parts of the scroll, top, middle, bottom third segments. Visible in panelView
 	public  void setPanels(string top, string middle, string bottom)
     {
-		top = "Symb_" + top;
-		middle = "Symb_" + middle;
-		bottom = "Symb_" + bottom;
 
         planeTop.GetComponent<Renderer>().material.mainTexture = (Texture2D) Resources.Load("Textures/" + top, typeof(Texture2D));
 		ingredientTop = top;
