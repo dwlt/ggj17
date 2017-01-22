@@ -41,6 +41,11 @@ public class Ingredient : VRTK_InteractableObject
 		}
 	}
 
+    public void togglePhysicsWhenGrabbed(bool physics)
+    {
+        this.transform.GetComponent<Collider>().enabled = physics;
+    }
+
     public override bool IsValidInteractableController(GameObject actualController, AllowedController controllerCheck)
     {
         controllerActions = actualController.GetComponent<VRTK_ControllerActions>();

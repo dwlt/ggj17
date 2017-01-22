@@ -7,11 +7,7 @@ public class WizardWhite : MonoBehaviour {
 	public Cauldron cauldron;
 	public ScrollScript scroll;
     //string literals of ingredient types. Filepath for the corresponding texture 
-    //is Assets/Resources/Textures/<string>
-
-
-
-
+    //is Assets/Resources/Textures/<string
     // Use this for initialization
     void Start () {
 	}

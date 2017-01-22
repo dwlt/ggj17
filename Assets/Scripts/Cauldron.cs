@@ -23,6 +23,7 @@ public class Cauldron : MonoBehaviour {
         
 		gameOverFanfare.LoadAudioData();
 		gameWonFanfare.LoadAudioData();
+
         this.ingredientTypes = new List<string>
         {
             //Mineables
@@ -48,6 +49,7 @@ public class Cauldron : MonoBehaviour {
         wizardWhite = theGame.GetComponent<WizardWhite>();
         wizardWhite.controlScroll();
     }
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -115,10 +117,9 @@ public class Cauldron : MonoBehaviour {
 		for (int i = 0; i < recipeSize; i++) {
 			int nextIngredient = Random.Range (0, ingredientTypes.Count);
 			recipe.Add (ingredientTypes.ElementAt(nextIngredient));
+
 		}
 	}
-
-
 
 	void printRecipe(){
 		Debug.Log ("Recipe:");
