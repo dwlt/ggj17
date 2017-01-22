@@ -14,6 +14,7 @@ public class Cauldron : MonoBehaviour {
     public GameObject failPrize;
     private WizardWhite wizardWhite;
     public int recipeSize = 1;
+	public bool shuffleObjectsOnStart = false;
 
     public float remainingTime = 120f;
 
@@ -30,6 +31,20 @@ public class Cauldron : MonoBehaviour {
         recipeSize += 2;
 		gameOverFanfare.LoadAudioData();
 		gameWonFanfare.LoadAudioData();
+
+		if (shuffleObjectsOnStart) {
+			GameObject[] srcs = GameObject.FindGameObjectsWithTag("IngredientSource");
+
+			System.Random rnd = new System.Random ();
+			int l = srcs.Length;
+			for (int i=0; i < l-1; i++) {
+				int r = i + rnd.Next (l - i);
+				Debug.Log ("Swapping " + i + " and " + r);
+				Vector3 tmp = srcs[r].transform.position;
+				srcs[r].transform.position = new Vector3(srcs[i].transform.position.x, tmp.y, srcs[i].transform.position.z);
+				srcs[i].transform.position = new Vector3(tmp.x,  srcs[i].transform.position.y, tmp.z);
+			}
+		}
 
         this.ingredientTypes = new List<string>
         {
