@@ -29,7 +29,7 @@ public class Ingredient : VRTK_InteractableObject
 	// Use this for initialization
 	void Start () {
 		//cauldronCorrect.LoadAudioData();
-		//floorHit.LoadAudioData();
+		floorHit.LoadAudioData();
 		successfulGrab.LoadAudioData();
 	
 	}

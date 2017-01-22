@@ -107,7 +107,7 @@ public class Cauldron : MonoBehaviour {
         }
         //Rest of Game Logic
         Vector3 prizePos = new Vector3(0, 1.1f, 0);
-        GameObject prize = Instantiate(this.thePrize, transform.position + prizePos, transform.rotation);
+        Instantiate(this.thePrize, transform.position + prizePos, transform.rotation);
     }
     //Fail state for some reason
     public void GameLost()
