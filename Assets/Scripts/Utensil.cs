@@ -2,14 +2,22 @@
 using UnityEngine;
 using VRTK;
 
-public class Utensil : VRTK_ControllerEvents
+public class Utensil : MonoBehaviour
 {
 	public enum UtensilType 
 	{
 		Shears, Knife, Pickaxe
 	}
 
-    
+    public Vector3 positionChange;
+    public Vector3 rotationChange;
+    public Vector3 scaleChange;
+    public Vector3 defaultPosition;
+    public Vector3 defaultScale;
+
+    public Rigidbody attachPoint;
+    public GameObject altar;
+
 
     [Tooltip("FX for invalid attempt to grab")]
     public AudioClip unsuccessfulGrab;

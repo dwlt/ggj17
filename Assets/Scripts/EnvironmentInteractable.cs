@@ -39,9 +39,9 @@ public class EnvironmentInteractable : VRTK_InteractableObject {
         GameObject utensil = this.controllerActions.gameObject;
         //spawn my resource - try not to spawn too many - OOPS
 
-        if (tooled && (!utensil.GetComponent<Utensil>().attachedIngredient || utensil.GetComponent<Utensil>().attachedIngredient.ingredientName != this.resource.GetComponent<Ingredient>().ingredientName))
+        if (tooled && (!utensil.GetComponentInChildren<Utensil>().attachedIngredient || utensil.GetComponentInChildren<Utensil>().attachedIngredient.ingredientName != this.resource.GetComponent<Ingredient>().ingredientName))
         {
-            if (utensil.GetComponent<Utensil>().attachedIngredient)
+            if (utensil.GetComponentInChildren<Utensil>().attachedIngredient)
             {
                 //drop old attached item
                 utensil.GetComponent<VRTK_InteractGrab>().grabEnabledState = 2;
@@ -55,8 +55,8 @@ public class EnvironmentInteractable : VRTK_InteractableObject {
             controllerActions.GetComponent<VRTK_InteractGrab>().grabEnabledState++;
             harvestedResource.GetComponent<Ingredient>().grabAttachMechanicScript.StartGrab(utensil, harvestedResource, attachPoint);
             harvestedResource.GetComponent<Ingredient>().grabbingObjects.Add(utensil);
-            utensil.GetComponent<Utensil>().attachedIngredient = harvestedResource.GetComponent<Ingredient>();
-            harvestedResource.GetComponent<Ingredient>().grabbingUtensil = utensil.GetComponent<Utensil>();
+            utensil.GetComponentInChildren<Utensil>().attachedIngredient = harvestedResource.GetComponent<Ingredient>();
+            harvestedResource.GetComponent<Ingredient>().grabbingUtensil = utensil.GetComponentInChildren<Utensil>();
             harvestedResource.GetComponent<Ingredient>().togglePhysicsWhenGrabbed(false);
             // make the resource exclaim its joy at being included in a recipe
             harvestedResource.GetComponent<Ingredient>().playGrabbedSound();
@@ -66,7 +66,7 @@ public class EnvironmentInteractable : VRTK_InteractableObject {
     public override bool IsValidInteractableController(GameObject actualController, AllowedController controllerCheck)
     {
         controllerActions = actualController.GetComponent<VRTK_ControllerActions>();
-        Utensil utensil = actualController.GetComponent<Utensil>();
+        Utensil utensil = actualController.GetComponentInChildren<Utensil>();
         // this triggers when utensil hits a resource object
         if (utensil)
         {// is this the correct tool for this thing we are trying to grab?

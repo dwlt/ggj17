@@ -49,7 +49,7 @@ public class Ingredient : VRTK_InteractableObject
     public override bool IsValidInteractableController(GameObject actualController, AllowedController controllerCheck)
     {
         controllerActions = actualController.GetComponent<VRTK_ControllerActions>();
-        Utensil utensil = actualController.GetComponent<Utensil>();
+        Utensil utensil = actualController.GetComponentInChildren<Utensil>();
 
         if (utensil)
         {
